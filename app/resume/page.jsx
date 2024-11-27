@@ -7,10 +7,11 @@ import {
   FaReact,
   FaFigma,
   FaNodeJs,
-  FaJava
+  FaJava,
+
 } from "react-icons/fa";
 
-import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
+import { SiTailwindcss, SiNextdotjs, SiTypescript, SiMongodb, SiMysql } from "react-icons/si";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
@@ -99,8 +100,12 @@ const skills = {
     { icon: <SiTailwindcss />, name: "Tailwind CSS" },
     { icon: <FaFigma />, name: "Figma" },
     { icon: <FaJava />, name: "Java" },
+    { icon: <SiTypescript />, name: "TypeScript" },  // Added TypeScript
+    { icon: <SiMongodb />, name: "MongoDB" },        // Added MongoDB
+    { icon: <SiMysql />, name: "MySQL" },            // Added MySQL as a DBMS example
   ],
 };
+
 const Resume = () => {
   const totalProjects = projects.items.length; // Calculate total projects
 
