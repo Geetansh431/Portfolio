@@ -28,4 +28,4 @@ This project is a sleek and responsive portfolio designed for developers, design
 
 ## 🌐 Live Demo
 
-https://portfolio-5c2i-jceerozav-geetansh431s-projects.vercel.app/
+https://portfolio-5c2i.vercel.app/
