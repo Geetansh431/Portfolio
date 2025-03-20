@@ -30,34 +30,121 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "New Contact Form Submission",
     message: "",
   });
 
-  const [success, setSuccess] = useState(false);
+  const [formStatus, setFormStatus] = useState({
+    submitted: false,
+    success: false,
+    message: ""
+  });
+
+  const [formErrors, setFormErrors] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    const errors = {
+      name: "",
+      email: "",
+      message: ""
+    };
+
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+      valid = false;
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+      valid = false;
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      errors.email = "Please enter a valid email";
+      valid = false;
+    }
+
+    if (!formData.message.trim()) {
+      errors.message = "Message is required";
+      valid = false;
+    }
+
+    setFormErrors(errors);
+    return valid;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Clear error when user types
+    if (formErrors[name]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [name]: ""
+      }));
+    }
   };
 
   const sendEmail = (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setFormStatus({
+      submitted: true,
+      success: false,
+      message: "Sending your message..."
+    });
+
+    // Prepare data with better formatting for email template
+    const templateParams = {
+      from_name: formData.name,
+      reply_to: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      // Additional fields that can be used in the EmailJS template
+      sender_email: formData.email,
+      sender_name: formData.name,
+      to_name: "Website Administrator", // You can customize this
+      date: new Date().toLocaleString()
+    };
 
     emailjs
       .send(
-        "service_cndpfjg", // Replace with your EmailJS service ID
-        "template_en9ohas", // Replace with your EmailJS template ID
-        formData,
-        "iL93Cf_CMFgdTYzRo" // Replace with your EmailJS user ID
+        "service_cndpfjg", // Your EmailJS service ID
+        "template_en9ohas", // Your EmailJS template ID
+        templateParams,
+        "iL93Cf_CMFgdTYzRo" // Your EmailJS user ID
       )
       .then(
         (result) => {
           console.log("Email sent successfully:", result.text);
-          setSuccess(true);
+          setFormStatus({
+            submitted: true,
+            success: true,
+            message: "Your message has been sent successfully! We'll get back to you soon."
+          });
+          // Reset form after successful submission
+          setFormData({
+            name: "",
+            email: "",
+            subject: "New Contact Form Submission",
+            message: ""
+          });
         },
         (error) => {
           console.error("Email sending failed:", error.text);
-          setSuccess(false);
+          setFormStatus({
+            submitted: true,
+            success: false,
+            message: "Failed to send your message. Please try again later."
+          });
         }
       );
   };
@@ -92,41 +179,79 @@ const Contact = () => {
             <h2 className="text-4xl font-bold text-white mb-6">Send Us a Message</h2>
             <form className="space-y-6" onSubmit={sendEmail}>
               {/* Name Input */}
-              <Input
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                className="w-full p-4 text-lg bg-black text-white placeholder-gray-400 border border-gray-600 focus:ring-2 focus:ring-green-500 rounded-md"
-              />
+              <div>
+                <Input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  className={`w-full p-4 text-lg bg-black text-white placeholder-gray-400 border ${
+                    formErrors.name ? "border-red-500" : "border-gray-600"
+                  } focus:ring-2 focus:ring-green-500 rounded-md`}
+                />
+                {formErrors.name && (
+                  <p className="mt-1 text-red-500 text-sm">{formErrors.name}</p>
+                )}
+              </div>
 
               {/* Email Input */}
+              <div>
+                <Input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Your Email"
+                  type="email"
+                  className={`w-full p-4 text-lg bg-black text-white placeholder-gray-400 border ${
+                    formErrors.email ? "border-red-500" : "border-gray-600"
+                  } focus:ring-2 focus:ring-green-500 rounded-md`}
+                />
+                {formErrors.email && (
+                  <p className="mt-1 text-red-500 text-sm">{formErrors.email}</p>
+                )}
+              </div>
+
+              {/* Subject Input (Optional but helpful) */}
               <Input
-                name="email"
-                value={formData.email}
+                name="subject"
+                value={formData.subject}
                 onChange={handleChange}
-                placeholder="Your Email"
-                type="email"
+                placeholder="Subject (Optional)"
                 className="w-full p-4 text-lg bg-black text-white placeholder-gray-400 border border-gray-600 focus:ring-2 focus:ring-green-500 rounded-md"
               />
 
               {/* Message Textarea */}
-              <Textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Your Message"
-                rows={5}
-                className="w-full p-4 text-lg bg-black text-white placeholder-gray-400 border border-gray-600 focus:ring-2 focus:ring-green-500 rounded-md"
-              />
+              <div>
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Your Message"
+                  rows={5}
+                  className={`w-full p-4 text-lg bg-black text-white placeholder-gray-400 border ${
+                    formErrors.message ? "border-red-500" : "border-gray-600"
+                  } focus:ring-2 focus:ring-green-500 rounded-md`}
+                />
+                {formErrors.message && (
+                  <p className="mt-1 text-red-500 text-sm">{formErrors.message}</p>
+                )}
+              </div>
 
               {/* Submit Button */}
-              <Button type="submit" className="w-full py-3 text-lg bg-black text-white hover:text-green-500 rounded-md">
-                Send Message
+              <Button 
+                type="submit" 
+                className="w-full py-3 text-lg bg-black text-white hover:text-green-500 rounded-md"
+                disabled={formStatus.submitted && !formStatus.success}
+              >
+                {formStatus.submitted && !formStatus.success ? "Sending..." : "Send Message"}
               </Button>
             </form>
-            {success && (
-              <p className="mt-4 text-green-500">Your message has been sent successfully!</p>
+            
+            {/* Status Message */}
+            {formStatus.submitted && (
+              <div className={`mt-4 p-3 rounded ${formStatus.success ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                {formStatus.message}
+              </div>
             )}
           </div>
         </div>
