@@ -23,8 +23,8 @@ const Home = () => {
           {/* Button and Socials */}
           <div className="flex flex-col xl:flex-row items-center gap-4">
             <a
-              href="/GEETANSH_RESUME.pdf" // Path to the file in the public folder
-              download="Geetansh_Resume.pdf" // Desired filename when downloaded
+              href="/RESUME.pdf" // Path to the file in the public folder
+              download="Resume.pdf" // Desired filename when downloaded
               className="uppercase flex items-center gap-2 border border-accent rounded-lg px-4 py-2 hover:bg-accent hover:text-primary transition-all duration-500"
             >
 

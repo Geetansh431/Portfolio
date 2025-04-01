@@ -13,13 +13,47 @@ import {
   FaExternalLinkAlt,
   FaUser,
   FaUserCircle,
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaGlobe,
+  FaLanguage,
+  FaLinkedin,
+  FaTwitter,
+  FaCode,
+  FaDownload,
 } from "react-icons/fa";
-
-import { SiTailwindcss, SiNextdotjs, SiTypescript, SiMongodb, SiMysql } from "react-icons/si";
+import { SiLeetcode, SiCodeforces, SiHackerrank, SiTailwindcss, SiNextdotjs, SiTypescript, SiMongodb, SiMysql } from "react-icons/si";
 import { motion } from "framer-motion";
-import Social from "@/components/Social";
 import * as Dialog from '@radix-ui/react-dialog';
 import { IoClose } from "react-icons/io5";
+
+// Social Component with added platforms
+const Social = () => {
+  const socialLinks = [
+    { icon: <FaGithub size={20} />, url: "https://github.com/Geetansh431", label: "GitHub" },
+    { icon: <FaLinkedin size={20} />, url: "https://linkedin.com/in/geetansh-goyal", label: "LinkedIn" },
+    { icon: <SiLeetcode size={20} />, url: "https://leetcode.com/Geetansh431/", label: "LeetCode" },
+    { icon: <SiCodeforces size={20} />, url: "https://codeforces.com/profile/Geetansh431", label: "CodeForces" },
+  ];
+
+  return (
+    <div className="flex flex-wrap justify-center gap-3">
+      {socialLinks.map((social, index) => (
+        <a
+          key={index}
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 bg-white/10 rounded-lg hover:bg-accent hover:text-white transition-colors duration-300"
+          title={social.label}
+        >
+          {social.icon}
+        </a>
+      ))}
+    </div>
+  );
+};
 
 // About Data
 const about = {
@@ -27,13 +61,19 @@ const about = {
   description:
     "I'm Geetansh, a passionate developer with a keen interest in creating innovative solutions through technology. My journey in development began with a simple curiosity about how things work on the internet, which has evolved into a deep understanding of full-stack development. I specialize in building modern web applications using cutting-edge technologies and best practices. My approach combines technical expertise with creative problem-solving to deliver exceptional user experiences.",
   info: [
-    { fieldName: "Name", fieldValue: "Geetansh Goyal" },
-    { fieldName: "Phone", fieldValue: "(+91) 8847222304" },
-    { fieldName: "Nationality", fieldValue: "Indian" },
-    { fieldName: "Email", fieldValue: "Geetanshg2@gmail.com" },
-    { fieldName: "Languages", fieldValue: "English, Hindi" },
-    { fieldName: "Location", fieldValue: "Punjab, India" },
+    { fieldName: "Name", fieldValue: "Geetansh Goyal", icon: <FaUser /> },
+    { fieldName: "Phone", fieldValue: "(+91) 8847222304", icon: <FaPhone /> },
+    { fieldName: "Nationality", fieldValue: "Indian", icon: <FaGlobe /> },
+    { fieldName: "Email", fieldValue: "Geetanshg2@gmail.com", icon: <FaEnvelope /> },
+    { fieldName: "Languages", fieldValue: "English, Hindi", icon: <FaLanguage /> },
+    { fieldName: "Location", fieldValue: "Punjab, India", icon: <FaMapMarkerAlt /> },
   ],
+  coding: [
+    { platform: "LeetCode", username: "Geetansh431", problems: "200+ problems" },
+    { platform: "CodeForces", username: "Geetansh431", rating: "Specialist" },
+    { platform: "HackerRank", username: "Geetansh431", badges: "5 stars in Problem Solving" },
+    { platform: "GitHub", username: "Geetansh431", repos: "15+ repositories" },
+  ]
 };
 
 // Projects Data
@@ -46,7 +86,7 @@ const projects = {
       name: "StudyNotion",
       description:
         "A comprehensive ed-tech platform that revolutionizes online learning. Features include course creation, student enrollment, payment integration, and interactive learning materials.",
-      technologies: ["React.js", "Express.js", "Node.js", "MongoDB"],
+      technologies: ["React.js", "Node.js", "MongoDB"],
       github: "https://github.com/Geetansh431/StudyNotion",
       demo: "https://study-notion-theta-dusky.vercel.app/",
       image: "/assets/assets/work/thumb1.png",
@@ -351,7 +391,7 @@ const Portfolio = () => {
             </motion.div>
           )}
 
-          {/* About Section */}
+          {/* About Section - Enhanced with Coding Profiles */}
           {activeSection === "about" && (
             <motion.div
               key="about"
@@ -363,33 +403,176 @@ const Portfolio = () => {
                 <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-5">{about.title}</h2>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-colors p-6">
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                    <FaUserCircle className="mr-2 text-accent" /> Personal Profile
-                  </h3>
-                  <p className="text-white/80 text-sm sm:text-base mb-6 leading-relaxed">{about.description}</p>
-                  <div className="bg-white/5 rounded-lg p-4">
-                    <p className="text-accent font-medium mb-2">Connect with me</p>
-                    <div className="flex gap-4">
-                      <Social />
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8">
+                {/* Profile Image - New Addition */}
+                <motion.div 
+                  className="lg:col-span-2 flex flex-col gap-6"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-all duration-300 p-6 h-full">
+                    <div className="flex flex-col items-center">
+                      <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mb-6 overflow-hidden border-4 border-accent/20 shadow-lg shadow-accent/10">
+                        {/* Ensure correct image path */}
+                        <img 
+                          src="/assets/assets/profile.jpg" 
+                          alt="Geetansh Goyal"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://via.placeholder.com/150?text=GG";
+                          }}
+                        />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Geetansh Goyal</h3>
+                      <p className="text-accent text-sm font-medium mb-4">Full Stack Developer</p>
+                      
+                      <div className="bg-white/5 rounded-lg p-4 w-full">
+                        <p className="text-accent font-medium mb-3 text-center">Connect with me</p>
+                        {/* Updated Social Component */}
+                        <Social />
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-colors p-6">
-                  <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                    <FaUser className="mr-2 text-accent" /> Personal Information
-                  </h3>
-                  <div className="grid grid-cols-1 gap-4">
-                    {about.info.map((item, index) => (
-                      <div key={index} className="flex justify-between items-center text-white/80 text-sm sm:text-base border-b border-white/10 pb-3">
-                        <span className="font-medium text-white">{item.fieldName}</span>
-                        <span className="text-accent">{item.fieldValue}</span>
-                      </div>
-                    ))}
+                </motion.div>
+                
+                {/* About and Personal Info - Modified */}
+                <motion.div 
+                  className="lg:col-span-3 flex flex-col gap-6"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  {/* About Description */}
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-all duration-300 p-6">
+                    <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                      <FaUserCircle className="mr-2 text-accent" /> About Me
+                    </h3>
+                    <p className="text-white/80 text-sm sm:text-base mb-4 leading-relaxed">{about.description}</p>
+                    
+                    <div className="mt-4 p-4 bg-accent/5 rounded-lg border border-accent/20">
+                      <h4 className="text-white font-medium mb-2 inline-flex items-center">
+                        <span className="w-2 h-2 bg-accent rounded-full mr-2"></span> 
+                        Currently looking for new opportunities
+                      </h4>
+                      <p className="text-white/70 text-sm">
+                        Open to work on interesting projects and collaborations.
+                      </p>
+                    </div>
                   </div>
-                </div>
+                  
+                  {/* Personal Information - Improved */}
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-all duration-300 p-6">
+                    <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                      <FaUser className="mr-2 text-accent" /> Personal Information
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {about.info.map((item, index) => (
+                        <div 
+                          key={index} 
+                          className="flex items-center p-3 rounded-lg hover:bg-white/5 transition-colors border border-white/5 hover:border-accent/20"
+                        >
+                          <div className="mr-3 text-accent text-lg">
+                            {item.icon}
+                          </div>
+                          <div>
+                            <p className="text-white/60 text-xs">{item.fieldName}</p>
+                            <p className="text-white font-medium">{item.fieldValue}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Download Resume Button */}
+                    <div className="mt-6 flex justify-center">
+                      <a 
+                      href="/RESUME.pdf" // Path to the file in the public folder
+                      download="Resume.pdf" // Desired filename when downloaded
+                        className="inline-flex items-center px-6 py-3 bg-accent text-white rounded-full font-medium shadow-lg shadow-accent/20 hover:bg-accent/90 transition-all duration-300 hover:scale-105"
+                      >
+                        <FaDownload className="h-5 w-5 mr-2" />
+                        Download Resume
+                      </a>
+                    </div>
+                  </div>
+                  
+                  {/* NEW: Coding Profiles Section */}
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-all duration-300 p-6">
+                    <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                      <FaCode className="mr-2 text-accent" /> Coding Profiles
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-accent/20 transition-all hover:shadow-md">
+                        <div className="flex items-center mb-3">
+                          <SiLeetcode className="text-xl text-accent mr-3" />
+                          <h4 className="font-medium text-white">LeetCode</h4>
+                        </div>
+                        <p className="text-sm text-white/70 mb-1">@Geetansh431</p>
+                        <p className="text-sm text-white/70">500+ problems solved</p>
+                        <a 
+                          href="https://leetcode.com/Geetansh431/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-block text-xs text-accent hover:underline"
+                        >
+                          View Profile →
+                        </a>
+                      </div>
+                      
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-accent/20 transition-all hover:shadow-md">
+                        <div className="flex items-center mb-3">
+                          <SiCodeforces className="text-xl text-accent mr-3" />
+                          <h4 className="font-medium text-white">CodeForces</h4>
+                        </div>
+                        <p className="text-sm text-white/70 mb-1">@Geetansh431</p>
+                        <p className="text-sm text-white/70">Newbie (900+ rating)</p>
+                        <a 
+                          href="https://codeforces.com/profile/Geetansh431" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-block text-xs text-accent hover:underline"
+                        >
+                          View Profile →
+                        </a>
+                      </div>
+                      
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-accent/20 transition-all hover:shadow-md">
+                        <div className="flex items-center mb-3">
+                          <SiHackerrank className="text-xl text-accent mr-3" />
+                          <h4 className="font-medium text-white">GeeksForGeeks</h4>
+                        </div>
+                        <p className="text-sm text-white/70 mb-1">@Geetansh431</p>
+                        <p className="text-sm text-white/70">200+ Problems Solved</p>
+                        <a 
+                          href="https://www.geeksforgeeks.org/user/geetanmfp8/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-block text-xs text-accent hover:underline"
+                        >
+                          View Profile →
+                        </a>
+                      </div>
+                      
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-accent/20 transition-all hover:shadow-md">
+                        <div className="flex items-center mb-3">
+                          <FaGithub className="text-xl text-accent mr-3" />
+                          <h4 className="font-medium text-white">GitHub</h4>
+                        </div>
+                        <p className="text-sm text-white/70 mb-1">@Geetansh431</p>
+                        <p className="text-sm text-white/70">15+ repositories</p>
+                        <a 
+                          href="https://github.com/Geetansh431" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-block text-xs text-accent hover:underline"
+                        >
+                          View Profile →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           )}
