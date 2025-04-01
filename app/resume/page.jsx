@@ -11,142 +11,104 @@ import {
   FaJava,
   FaGithub,
   FaExternalLinkAlt,
+  FaUser,
+  FaUserCircle,
 } from "react-icons/fa";
 
 import { SiTailwindcss, SiNextdotjs, SiTypescript, SiMongodb, SiMysql } from "react-icons/si";
 import { motion } from "framer-motion";
 import Social from "@/components/Social";
+import * as Dialog from '@radix-ui/react-dialog';
+import { IoClose } from "react-icons/io5";
 
 // About Data
 const about = {
   title: "About Me",
   description:
-    "I'm Geetansh, a developer with a passion for coding and technology. I've always been fascinated by how things work and enjoy diving deep into solving complex problems. My journey into development started with a simple curiosity, and it has now grown into a full-fledged career path. I love experimenting with new technologies, learning new programming languages, and building innovative projects.",
+    "I'm Geetansh, a passionate developer with a keen interest in creating innovative solutions through technology. My journey in development began with a simple curiosity about how things work on the internet, which has evolved into a deep understanding of full-stack development. I specialize in building modern web applications using cutting-edge technologies and best practices. My approach combines technical expertise with creative problem-solving to deliver exceptional user experiences.",
   info: [
     { fieldName: "Name", fieldValue: "Geetansh Goyal" },
     { fieldName: "Phone", fieldValue: "(+91) 8847222304" },
     { fieldName: "Nationality", fieldValue: "Indian" },
     { fieldName: "Email", fieldValue: "Geetanshg2@gmail.com" },
-    { fieldName: "Freelance", fieldValue: "Available" },
     { fieldName: "Languages", fieldValue: "English, Hindi" },
+    { fieldName: "Location", fieldValue: "Punjab, India" },
   ],
 };
 
 // Projects Data
 const projects = {
-  title: "My Projects",
+  title: "Featured Projects",
   description:
-    "Here are some of the exciting projects I have worked on that showcase my development skills and creativity.",
+    "A collection of my best work showcasing my expertise in full-stack development, UI/UX design, and problem-solving abilities.",
   items: [
     {
       name: "StudyNotion",
       description:
-        "Developed a fully functional ed-tech platform enabling users to add courses for students to purchase and consume. Used JWT for Google OAuth for authentication and authorization, integrated Razorpay for payments, and implemented unique QR codes for each order.",
-      technologies: ["React.js", "Express.js", "Node.js", "MongoDB", "Tailwind.css"],
-      github: "#",
-      demo: "#",
-      image: "/placeholder.jpg",
-    },
-    {
-      name: "FlappyBird",
-      description:
-        "Developed a Flappy Bird clone using Java and Swing, featuring smooth gameplay, score tracking, and randomized obstacle generation. Implemented responsive controls, game-over logic, and restart functionality.",
-      technologies: ["Java", "Swing"],
-      github: "#",
-      demo: "#",
-      image: "/placeholder.jpg",
-    },
-    {
-      name: "Stock Trading Platform",
-      description:
-        "Created a platform allowing users to buy, sell, and manage their stock portfolios. Integrated Google OAuth authentication with JWT, Razorpay for payments, and unique QR codes for transactions.",
+        "A comprehensive ed-tech platform that revolutionizes online learning. Features include course creation, student enrollment, payment integration, and interactive learning materials.",
       technologies: ["React.js", "Express.js", "Node.js", "MongoDB"],
-      github: "#",
-      demo: "#",
-      image: "/placeholder.jpg",
-    },
-    {
-      name: "Home Rental Web App",
-      description:
-        "Developed a Home Rental application enabling property browsing and listing. Integrated Redux for state management and Express.js for backend API requests. Features include location filters, JWT-based authentication, and RESTful APIs.",
-      technologies: ["React", "Redux", "Express.js", "Node.js", "MongoDB"],
-      github: "#",
-      demo: "#",
-      image: "/placeholder.jpg",
-    },
-    {
-      name: "Airbnb Clone",
-      description:
-        "Developed a web application replicating core Airbnb functionalities. Features include user authentication, property listings, booking management, and responsive design. Integrated Multer for image uploads and JWT for secure authentication.",
-      technologies: ["React", "Redux", "Express.js", "MongoDB", "MUI"],
-      github: "#",
-      demo: "#",
-      image: "/placeholder.jpg",
-    },
-    {
-      name: "Gemini Clone",
-      description:
-        "This project is a React-based user interface for interacting with the Google Gemini API, utilizing the Generative AI SDK. The application allows users to input prompts and receive generative responses from the Gemini model.",
-      technologies: ["React", "Redux", "Tailwind.css"],
-      github: "#",
-      demo: "#",
-      image: "/placeholder.jpg",
+      github: "https://github.com/Geetansh431/StudyNotion",
+      demo: "https://study-notion-theta-dusky.vercel.app/",
+      image: "/assets/assets/work/thumb1.png",
+      type: "E-Learning Platform"
     },
   ],
 };
 
 // Education Data
 const education = {
-  title: "My Education",
+  title: "Educational Journey",
+  description: "My academic path and qualifications that have shaped my professional development",
   items: [
-    { institution: "St. Xavier's School", degree: "Matriculation(X)", duration: "2020" },
-    { institution: "Sudesh Vatika Convent School", degree: "Intermediate(XII)", duration: "2022" },
-    { institution: "Chitkara University", degree: "B.Tech Computer Science", duration: "2022 - 2026" },
+    {
+      institution: "St. Xavier's School",
+      degree: "Matriculation(X)",
+      duration: "2020",
+      description: "Completed with distinction in Science and Mathematics"
+    },
+    {
+      institution: "Sudesh Vatika Convent School",
+      degree: "Intermediate(XII)",
+      duration: "2022",
+      description: "Specialized in Computer Science with excellent academic performance"
+    },
+    {
+      institution: "Chitkara University",
+      degree: "B.Tech Computer Science",
+      duration: "2022 - 2026",
+      description: "Currently pursuing with focus on software development and computer science fundamentals"
+    },
   ],
 };
 
-// Skills Data
+// Skills Data - Simplified without categories
 const skills = {
-  title: "My Skills",
-  categories: [
-    {
-      name: "Frontend",
-      skills: [
-        { icon: <FaHtml5 />, name: "HTML 5", level: 90 },
-        { icon: <FaCss3 />, name: "CSS", level: 85 },
-        { icon: <FaJs />, name: "JavaScript", level: 88 },
-        { icon: <FaReact />, name: "React.js", level: 85 },
-        { icon: <SiNextdotjs />, name: "Next.js", level: 80 },
-        { icon: <SiTailwindcss />, name: "Tailwind CSS", level: 90 },
-      ]
-    },
-    {
-      name: "Backend",
-      skills: [
-        { icon: <FaNodeJs />, name: "Node.js", level: 82 },
-        { icon: <SiMongodb />, name: "MongoDB", level: 78 },
-        { icon: <SiMysql />, name: "MySQL", level: 75 },
-      ]
-    },
-    {
-      name: "Other",
-      skills: [
-        { icon: <FaJava />, name: "Java", level: 75 },
-        { icon: <SiTypescript />, name: "TypeScript", level: 72 },
-        { icon: <FaFigma />, name: "Figma", level: 85 },
-      ]
-    }
+  title: "Technical Expertise",
+  description: "My comprehensive skill set covering various aspects of modern web development",
+  items: [
+    { icon: <FaHtml5 />, name: "HTML 5" },
+    { icon: <FaCss3 />, name: "CSS" },
+    { icon: <FaJs />, name: "JavaScript" },
+    { icon: <FaReact />, name: "React.js" },
+    { icon: <SiNextdotjs />, name: "Next.js" },
+    { icon: <SiTailwindcss />, name: "Tailwind CSS" },
+    { icon: <FaNodeJs />, name: "Node.js" },
+    { icon: <SiMongodb />, name: "MongoDB" },
+    { icon: <SiMysql />, name: "MySQL" },
+    { icon: <FaJava />, name: "Java" },
+    { icon: <SiTypescript />, name: "TypeScript" },
+    { icon: <FaFigma />, name: "Figma" },
   ]
 };
 
-const Resume = () => {
+const Portfolio = () => {
   const [activeSection, setActiveSection] = useState("projects");
-  const [activeSkillCategory, setActiveSkillCategory] = useState("Frontend");
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" }
     }
@@ -180,24 +142,24 @@ const Resume = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-[80vh] py-12 px-4"
+      className="min-h-[80vh] py-8 sm:py-12 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Navigation */}
-        <motion.div 
+        <motion.div
           variants={fadeIn}
           initial="hidden"
           animate="visible"
-          className="mb-12 flex flex-wrap justify-center gap-1 md:gap-2"
+          className="mb-8 sm:mb-12 flex flex-wrap justify-center gap-3 sm:gap-4"
         >
           {["projects", "skills", "education", "about"].map((section) => (
             <button
               key={section}
               onClick={() => setActiveSection(section)}
-              className={`px-4 py-2 rounded-full text-sm md:text-base uppercase font-medium transition-all duration-300 ${
-                activeSection === section 
-                  ? "text-accent border-b-2 border-accent" 
-                  : "text-white hover:text-accent"
+              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-sm sm:text-base md:text-base uppercase font-medium transition-all duration-300 ${
+                activeSection === section
+                  ? "bg-accent/20 text-accent border-b-2 border-accent shadow-md"
+                  : "text-white hover:text-accent hover:bg-white/5"
               }`}
             >
               {section}
@@ -206,7 +168,7 @@ const Resume = () => {
         </motion.div>
 
         {/* Content Area */}
-        <div className="mt-8">
+        <div className="mt-8 sm:mt-10">
           {/* Projects Section */}
           {activeSection === "projects" && (
             <motion.div
@@ -215,62 +177,99 @@ const Resume = () => {
               initial="hidden"
               animate="visible"
             >
-              <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-white mb-4">{projects.title}</h2>
-                <p className="text-white/80 max-w-2xl mx-auto">{projects.description}</p>
+              <div className="text-center mb-10 sm:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-5">{projects.title}</h2>
+                <p className="text-white/80 text-sm sm:text-base max-w-2xl mx-auto px-4">{projects.description}</p>
               </div>
 
-              <motion.div 
+              <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10"
               >
                 {projects.items.map((project, index) => (
                   <motion.div
                     key={index}
                     custom={index}
                     variants={staggerItem}
-                    className="bg-white/5 backdrop-blur-sm overflow-hidden rounded-xl group border border-white/10 hover:border-accent/50 transition-colors"
+                    className="bg-[#111] rounded-xl overflow-hidden shadow-xl group transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 cursor-pointer"
+                    style={{
+                      borderRadius: "14px",
+                      border: "1px solid rgba(255, 255, 255, 0.08)"
+                    }}
                   >
-                    <div className="h-48 bg-white/5 relative">
-                      <div className="absolute inset-0 bg-accent/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="flex space-x-4">
-                          <a href={project.github} className="bg-white/5 p-3 rounded-full text-accent hover:bg-accent hover:text-white transition-all duration-300">
-                            <FaGithub className="text-xl" />
-                          </a>
-                          <a href={project.demo} className="bg-white/5 p-3 rounded-full text-accent hover:bg-accent hover:text-white transition-all duration-300">
-                            <FaExternalLinkAlt className="text-xl" />
-                          </a>
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                      <div className="relative">
+                        <div className="w-full h-56 md:h-64 overflow-hidden">
+                          <img
+                            src={project.image || "/assets/assets/work/placeholder.jpg"}
+                            alt={project.name}
+                            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-[#000000cc] via-[#00000066] to-transparent flex items-end justify-center pb-5">
+                          <span className="text-white font-medium px-4 py-2 rounded-full bg-accent/80 text-sm">
+                            View Project
+                          </span>
                         </div>
                       </div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors duration-300">{project.name}</h3>
-                      <p className="text-white/80 text-sm mb-4 line-clamp-3">{project.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-2 py-1 bg-white/5 text-xs text-accent rounded-md"
-                          >
-                            {tech}
+                      
+                      <div className="p-6">
+                        <div className="mb-3">
+                          <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase px-3 py-1 bg-cyan-400/10 rounded-full">
+                            {project.type}
                           </span>
-                        ))}
-                        {project.technologies.length > 3 && (
-                          <span className="px-2 py-1 bg-white/5 text-xs text-accent rounded-md">
-                            +{project.technologies.length - 3}
-                          </span>
-                        )}
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
+                          {project.name}
+                        </h3>
+                        <p className="text-gray-400 text-sm mb-5 line-clamp-3">
+                          {project.description}
+                        </p>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-wrap gap-2">
+                            {project.technologies.map((tech, techIndex) => (
+                              <span
+                                key={techIndex}
+                                className="px-3 py-1 bg-white/10 text-xs text-gray-300 rounded-full"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                          
+                          <div className="flex space-x-3">
+                            <a
+                              href={project.github}
+                              className="p-2 rounded-full text-white/70 hover:text-accent transition-colors"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <FaGithub className="text-lg" />
+                            </a>
+                            <a
+                              href={project.demo}
+                              className="p-2 rounded-full text-white/70 hover:text-accent transition-colors"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <FaExternalLinkAlt className="text-lg" />
+                            </a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   </motion.div>
                 ))}
               </motion.div>
             </motion.div>
           )}
 
-          {/* Skills Section */}
+          {/* Skills Section - Simplified */}
           {activeSection === "skills" && (
             <motion.div
               key="skills"
@@ -278,65 +277,30 @@ const Resume = () => {
               initial="hidden"
               animate="visible"
             >
-              <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-white mb-4">{skills.title}</h2>
-                <div className="flex justify-center gap-4 mt-6 mb-8">
-                  {skills.categories.map((category) => (
-                    <button
-                      key={category.name}
-                      onClick={() => setActiveSkillCategory(category.name)}
-                      className={`px-4 py-2 rounded-lg text-sm transition-all duration-300 ${
-                        activeSkillCategory === category.name
-                          ? "text-accent border-b-2 border-accent"
-                          : "text-white hover:text-accent"
-                      }`}
-                    >
-                      {category.name}
-                    </button>
-                  ))}
-                </div>
+              <div className="text-center mb-10 sm:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-5">{skills.title}</h2>
+                <p className="text-white/80 text-sm sm:text-base max-w-2xl mx-auto px-4">{skills.description}</p>
               </div>
 
-              <div className="max-w-3xl mx-auto">
-                {skills.categories.map((category) => (
-                  activeSkillCategory === category.name && (
-                    <motion.div 
-                      key={category.name}
-                      variants={staggerContainer}
-                      initial="hidden"
-                      animate="visible"
-                      className="space-y-6"
-                    >
-                      {category.skills.map((skill, index) => (
-                        <motion.div
-                          key={index}
-                          custom={index}
-                          variants={staggerItem}
-                          className="bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/10"
-                        >
-                          <div className="flex items-center mb-2">
-                            <div className="text-2xl mr-3 text-accent">
-                              {skill.icon}
-                            </div>
-                            <span className="text-white font-medium">{skill.name}</span>
-                          </div>
-                          <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
-                              transition={{ duration: 1, ease: "easeOut", delay: 0.3 + (index * 0.1) }}
-                              className="h-full bg-accent"
-                            />
-                          </div>
-                          <div className="mt-1 text-right text-sm text-accent">
-                            {skill.level}%
-                          </div>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  )
+              {/* Skill Items as simple cards in a grid */}
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6"
+              >
+                {skills.items.map((skill, index) => (
+                  <motion.div
+                    key={index}
+                    custom={index}
+                    variants={staggerItem}
+                    className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-all duration-300 p-4 sm:p-6 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 flex flex-col items-center text-center"
+                  >
+                    <span className="text-3xl sm:text-4xl text-accent mb-3">{skill.icon}</span>
+                    <h3 className="text-base sm:text-lg font-bold text-white">{skill.name}</h3>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
           )}
 
@@ -348,42 +312,42 @@ const Resume = () => {
               initial="hidden"
               animate="visible"
             >
-              <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-white mb-4">{education.title}</h2>
+              <div className="text-center mb-10 sm:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-5">{education.title}</h2>
+                <p className="text-white/80 text-sm sm:text-base max-w-2xl mx-auto px-4">{education.description}</p>
               </div>
 
-              <div className="max-w-3xl mx-auto relative">
-                {/* Timeline line */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-accent/30 z-0"></div>
-
-                <motion.div 
-                  variants={staggerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="space-y-16 relative z-10"
-                >
-                  {education.items.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      custom={index}
-                      variants={staggerItem}
-                      className={`flex ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
-                    >
-                      <div className="md:w-1/2 flex justify-center md:justify-end md:pr-8">
-                        <div className={`bg-white/5 backdrop-blur-sm p-6 rounded-lg border-l-4 border-accent max-w-sm ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}`}>
-                          <span className="text-accent font-bold block mb-2">{item.duration}</span>
-                          <h3 className="text-xl font-bold text-white mb-1">{item.institution}</h3>
-                          <p className="text-white/80">{item.degree}</p>
-                        </div>
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="space-y-8 sm:space-y-10 relative before:absolute before:left-4 sm:before:left-1/2 before:-ml-px before:h-full before:w-0.5 before:bg-accent/20 before:content-['']"
+              >
+                {education.items.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={staggerItem}
+                    className={`relative flex items-center ${
+                      index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'
+                    }`}
+                  >
+                    <div className="flex h-10 w-10 bg-accent rounded-full items-center justify-center absolute z-10 left-0 sm:left-1/2 sm:-ml-5">
+                      <span className="text-white text-lg font-bold">{index + 1}</span>
+                    </div>
+                    
+                    <div className={`sm:w-1/2 ${
+                      index % 2 === 0 ? 'pr-12 sm:pr-16 pl-16 sm:pl-0' : 'pl-16 sm:pl-16 sm:pr-0'
+                    }`}>
+                      <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-colors p-6 shadow-xl hover:shadow-accent/5">
+                        <div className="mb-2 text-accent text-sm font-medium">{item.duration}</div>
+                        <h3 className="text-xl font-bold text-white mb-2">{item.institution}</h3>
+                        <p className="text-white/60 text-sm italic mb-3">{item.degree}</p>
+                        <p className="text-white/80 text-sm">{item.description}</p>
                       </div>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                        <div className="w-6 h-6 rounded-full bg-accent z-10"></div>
-                      </div>
-                      <div className="md:w-1/2"></div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           )}
 
@@ -395,48 +359,35 @@ const Resume = () => {
               initial="hidden"
               animate="visible"
             >
-              <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-white mb-4">{about.title}</h2>
+              <div className="text-center mb-10 sm:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-5">{about.title}</h2>
               </div>
 
-              <div className="max-w-4xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="md:col-span-2">
-                    <motion.div 
-                      className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <p className="text-white/80 leading-relaxed">{about.description}</p>
-                      <div className="mt-6">
-                        <Social containerStyles="flex gap-4" iconStyles="text-2xl text-accent hover:text-accent/80 transition-colors" />
-                      </div>
-                    </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-colors p-6">
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                    <FaUserCircle className="mr-2 text-accent" /> Personal Profile
+                  </h3>
+                  <p className="text-white/80 text-sm sm:text-base mb-6 leading-relaxed">{about.description}</p>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <p className="text-accent font-medium mb-2">Connect with me</p>
+                    <div className="flex gap-4">
+                      <Social />
+                    </div>
                   </div>
-                  <div className="md:col-span-1">
-                    <motion.div 
-                      className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                    >
-                      <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-2 mb-4">Personal Info</h3>
-                      <div className="space-y-3">
-                        {about.info.map((info, index) => (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: -0 }}
-                            transition={{ duration: 0.3, delay: 0.4 + (index * 0.1) }}
-                            className="flex flex-col"
-                          >
-                            <span className="text-white/60 text-sm">{info.fieldName}</span>
-                            <span className="text-accent font-medium">{info.fieldValue}</span>
-                          </motion.div>
-                        ))}
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-accent/50 transition-colors p-6">
+                  <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                    <FaUser className="mr-2 text-accent" /> Personal Information
+                  </h3>
+                  <div className="grid grid-cols-1 gap-4">
+                    {about.info.map((item, index) => (
+                      <div key={index} className="flex justify-between items-center text-white/80 text-sm sm:text-base border-b border-white/10 pb-3">
+                        <span className="font-medium text-white">{item.fieldName}</span>
+                        <span className="text-accent">{item.fieldValue}</span>
                       </div>
-                    </motion.div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -448,4 +399,4 @@ const Resume = () => {
   );
 };
 
-export default Resume;
+export default Portfolio;
